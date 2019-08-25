@@ -1,6 +1,20 @@
 ---
 - name: Install general stuffs
   pacman:
-    name: ["xorg-server"]
+    name: ["xorg-server", "i3-gaps", "lightdm", "lightdm-webkit2-greeter"]
     state: present
+  become: yes
+
+- name: Ensure lightdm uses webkit2-greeter
+  lineinfile:
+    path: /etc/lightdm/lightdm.conf
+    regexp: '^#?greeter-session='
+    line: greeter-session=lightdm-webkit2-greeter
+  become: yes
+
+- name: Start lightdm
+  service:
+    name: lightdm
+    enabled: true
+    state: started
   become: yes
