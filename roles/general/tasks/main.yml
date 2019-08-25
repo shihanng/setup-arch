@@ -1,5 +1,5 @@
 ---
-- name: Install xorg-server
+- name: Install general stuffs
   pacman:
     name: ["xorg-server"]
     state: present
