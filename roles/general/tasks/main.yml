@@ -12,6 +12,13 @@
     line: greeter-session=lightdm-webkit2-greeter
   become: yes
 
+- name: Ensure lightdm uses i3
+  lineinfile:
+    path: /etc/lightdm/lightdm.conf
+    regexp: '^#?user-session='
+    line: user-session=i3
+  become: yes
+
 - name: Start lightdm
   service:
     name: lightdm
