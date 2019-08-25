@@ -6,6 +6,7 @@ Install `sudo` and `openssh`:
 ```
 pacman -S sudo openssh python
 systemctl enable sshd.service
+systemctl start sshd.service
 ```
 
 Create a new user called `<username>`:
