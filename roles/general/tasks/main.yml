@@ -1,0 +1,6 @@
+---
+- name: Install xorg-server
+  pacman:
+    name: ["xorg-server"]
+    state: present
+  become: yes
