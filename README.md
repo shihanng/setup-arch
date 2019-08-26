@@ -30,3 +30,11 @@ export IPADDR=192.168.0.123
 make setup_ssh
 make install
 ```
+
+## On the target machine
+
+```
+export USERNAME=<username>
+export IPADDR=localhost
+make install
+```
