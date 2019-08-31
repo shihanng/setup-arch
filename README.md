@@ -25,7 +25,7 @@ passwd <username>
 ```
 export PUBKEY_PATH=$HOME/.ssh/id_rsa.pub
 export PRIVKEY_PATH=$HOME/.ssh/id_rsa
-export USERNAME=<username>
+export LOGINNAME=<username>
 export IPADDR=192.168.0.123
 make setup_ssh
 make install
@@ -34,7 +34,7 @@ make install
 ## On the target machine
 
 ```
-export USERNAME=<username>
+export LOGINNAME=<username>
 export IPADDR=localhost
 make install
 ```
