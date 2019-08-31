@@ -80,3 +80,10 @@
     name: ["alsa-utils", "pulseaudio", "pulseaudio-alsa"]
     state: present
   become: yes
+
+- name: Enable systemd-timesyncd
+  service:
+    name: systemd-timesyncd
+    enabled: true
+    state: started
+  become: yes
