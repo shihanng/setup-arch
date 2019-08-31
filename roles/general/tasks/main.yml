@@ -59,3 +59,18 @@
     dest:   /etc/pacman.d/hooks/nvidia.hook
     backup: no
   become: yes
+
+# https://wiki.archlinux.org/index.php/Solid_state_drive#Periodic_TRIM
+- name: "Start periodic trim: fstrim.service"
+  service:
+    name: fstrim.service
+    enabled: true
+  become: yes
+
+# https://wiki.archlinux.org/index.php/Solid_state_drive#Periodic_TRIM
+- name: "Start periodic trim: fstrim.timer"
+  service:
+    name: fstrim.timer
+    enabled: true
+    state: started
+  become: yes
