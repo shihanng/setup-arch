@@ -1,7 +1,7 @@
 ---
 - name: Install general stuffs
   pacman:
-    name: ["xorg-server", "i3-gaps", "lightdm", "lightdm-webkit2-greeter", "git", "ansible", "alacritty", "base-devel"]
+    name: ["xorg-server", "i3-gaps", "lightdm", "lightdm-webkit2-greeter", "git", "ansible", "alacritty", "base-devel", "nvidia"]
     state: present
   become: yes
 
@@ -24,4 +24,38 @@
     name: lightdm
     enabled: true
     state: started
+  become: yes
+
+# https://wiki.archlinux.org/index.php/NVIDIA#DRM_kernel_mode_setting
+- name: Add nvidia-drm.modeset=1 kernel parameter
+  copy:
+    content: |
+      options nvidia_drm modeset=1
+    dest: /etc/modprobe.d/nvidia.conf
+  become: yes
+
+- name: Add to initramfs
+  lineinfile:
+    path: /etc/mkinitcpio.conf
+    regexp: '^MODULES=()'
+    line: 'MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)'
+  become: yes
+  register: add_mod
+
+- name: Run mkinitcpio
+  command: "mkinitcpio -p linux"
+  when: add_mod.changed
+  become: yes
+
+- name: Create Pacman hook directory
+  file:
+    path:   /etc/pacman.d/hooks
+    state: directory
+  become: yes
+
+- name: Create Pacman hook
+  template:
+    src:    nvidia.hook.j2
+    dest:   /etc/pacman.d/hooks/nvidia.hook
+    backup: no
   become: yes
