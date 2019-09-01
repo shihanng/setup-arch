@@ -96,3 +96,12 @@
       - noto-fonts-cjk
     state: present
   become: yes
+
+- name: Enable multilib (for steam)
+  replace:
+    path: /etc/pacman.conf
+    regexp: '^#\[multilib\]\n^#Include.*'
+    replace: |-
+      [multilib]
+      Include = /etc/pacman.d/mirrorlist
+  become: yes
