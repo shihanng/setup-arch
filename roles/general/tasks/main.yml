@@ -87,3 +87,12 @@
     enabled: true
     state: started
   become: yes
+
+- name: Install fonts
+  pacman:
+    name:
+      - tex-gyre-fonts
+      - ttf-liberation
+      - noto-fonts-cjk
+    state: present
+  become: yes
