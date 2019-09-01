@@ -94,6 +94,7 @@
       - tex-gyre-fonts
       - ttf-liberation
       - noto-fonts-cjk
+      - noto-fonts-emoji
     state: present
   become: yes
 
