@@ -106,3 +106,10 @@
       [multilib]
       Include = /etc/pacman.d/mirrorlist
   become: yes
+
+- name: Disable power key on HHKB
+  lineinfile:
+    path: /etc/systemd/logind.conf
+    regexp: '^HandlePowerKey=.*'
+    line: 'HandlePowerKey=ignore'
+  become: yes
