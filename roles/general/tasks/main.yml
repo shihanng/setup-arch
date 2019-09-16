@@ -113,3 +113,16 @@
     regexp: '^HandlePowerKey=.*'
     line: 'HandlePowerKey=ignore'
   become: yes
+
+- name: Prevent random mute
+  lineinfile:
+    path: /etc/pulse/default.pa
+    regexp: '^load-module module-role-cork$'
+    line: '#load-module module-role-cork'
+  become: yes
+  register: mod_pulse
+
+- name: Kill pulseaudio
+  command: "pulseaudio -k"
+  when: mod_pulse.changed
+  become: yes
