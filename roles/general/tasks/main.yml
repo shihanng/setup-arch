@@ -117,7 +117,7 @@
 - name: Prevent random mute
   lineinfile:
     path: /etc/pulse/default.pa
-    regexp: '^load-module module-role-cork$'
+    regexp: '^#?load-module module-role-cork$'
     line: '#load-module module-role-cork'
   become: yes
   register: mod_pulse
