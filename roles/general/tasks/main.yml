@@ -1,7 +1,7 @@
 ---
 - name: Install general stuffs
   pacman:
-    name: ["xorg-server", "i3-gaps", "lightdm", "lightdm-webkit2-greeter", "git", "ansible", "alacritty", "base-devel", "nvidia", "blueberry", "bluez"]
+    name: ["xorg-server", "i3-gaps", "lightdm", "lightdm-webkit2-greeter", "git", "ansible", "alacritty", "base-devel", "nvidia", "bluez", "blueman", "pulseaudio-bluetooth", "bluez-utils"]
     state: present
   become: yes
 
