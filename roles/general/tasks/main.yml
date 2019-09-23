@@ -1,7 +1,7 @@
 ---
 - name: Install general stuffs
   pacman:
-    name: ["xorg-server", "i3-gaps", "lightdm", "lightdm-webkit2-greeter", "git", "ansible", "alacritty", "base-devel", "nvidia"]
+    name: ["xorg-server", "i3-gaps", "lightdm", "lightdm-webkit2-greeter", "git", "ansible", "alacritty", "base-devel", "nvidia", "blueberry", "bluez"]
     state: present
   become: yes
 
@@ -125,4 +125,11 @@
 - name: Kill pulseaudio
   command: "pulseaudio -k"
   when: mod_pulse.changed
+  become: yes
+
+- name: Start bluetooth
+  service:
+    name: bluetooth
+    enabled: true
+    state: started
   become: yes
